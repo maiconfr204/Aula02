@@ -54,6 +54,7 @@ const Home = () => {
                     require("../../assets/arrow-left.png")
                     }>
                 </Image>
+                
                 <View style={styles.inputTextView}>
                     <Image source={
                         require("../../assets/ei_search.png")
@@ -64,8 +65,6 @@ const Home = () => {
                         placeholder="Search"
                         placeholderTextColor="#F5FFFF"
                         >
-                        
-
                     </TextInput>
                 </View>
                 <Image source={
@@ -74,8 +73,31 @@ const Home = () => {
                 </Image>
             </View>
             <LinksHeader></LinksHeader>
+            <View style = {styles.conteinerButtons}>
+                <View style = {styles.buttons}>
+                    <Image source={
+                        require("../../assets/link-like.png")
+                    }>
+                    </Image>
+                    <Text>  Like</Text>
+                </View>
+                
+                <View style = {styles.buttons}>
+                    <Image source={
+                        require("../../assets/link-coment.png")
+                    }>
+                    </Image>
+                    <Text>  Comment</Text>
+                </View>
 
-
+                <View style = {styles.buttons}>
+                <Image source={
+                    require("../../assets/link-share.png")
+                }>
+                </Image>
+                <Text>  Share</Text>
+                </View>
+            </View> 
         </View>
     );
 
@@ -85,6 +107,17 @@ const styles = StyleSheet.create({
     container: {
         flex: 1,
         backgroundColor: '#FFF',
+    },
+    buttons:{
+        flexDirection:"row",
+        paddingLeft:20,
+        paddingRight:20,
+        paddingTop:10,
+        paddingBottom:10,
+    },
+    conteinerButtons:{
+        justifyContent:"center",
+        flexDirection:"row",
     },
     header:{
         minHeight:70,
