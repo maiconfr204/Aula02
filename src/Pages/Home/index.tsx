@@ -1,6 +1,12 @@
 import React from 'react';
 import { StatusBar } from 'expo-status-bar';
-import { StyleSheet, Text, View, Image, TextInput } from 'react-native';
+import {Text, View, Image, TextInput , TouchableOpacity, ScrollView} from 'react-native';
+import { styleLinksHeader, styleOneLinkHeader, styles } from './style';
+import {useNavigation} from '@react-navigation/native';
+import {NativeStackNavigationProp} from '@react-navigation/native-stack';
+import {StackNavigatorParamList} from '../types';
+
+import {Post} from '../Post';
 
 const OneLinkHeader = (props:any)=>{
     return(
@@ -9,11 +15,7 @@ const OneLinkHeader = (props:any)=>{
         </View>
     );
 };
-const styleOneLinkHeader = StyleSheet.create({
-    link:{
-        color:"#4A4A4C",
-    }
-});
+
 
 const LinksHeader = ()=>{
     return(// Aqui dentro eu coloco meu JSX
@@ -31,21 +33,14 @@ const LinksHeader = ()=>{
         </View>
     );
 };
-
-const styleLinksHeader = StyleSheet.create({
-    container:{
-        //backgroundColor:"lightblue",
-        color:"white",
-        flexDirection:"row",
-        justifyContent:"space-between",
-        paddingHorizontal:35,
-        paddingVertical:10,
-        borderBottomColor:"#F0F0F0",
-        borderBottomWidth:0.5,
-    },
-});
+type HomePros = NativeStackNavigationProp<StackNavigatorParamList,'Home'>;
 
 const Home = () => {
+    const navigation = useNavigation<HomePros>();
+    function irParaTelaLogin(){
+        // console.log("oi");
+        navigation.navigate('Login');
+    }    
     return(
         <View style={styles.container}>
             <StatusBar style="auto" />
@@ -54,7 +49,6 @@ const Home = () => {
                     require("../../assets/arrow-left.png")
                     }>
                 </Image>
-                
                 <View style={styles.inputTextView}>
                     <Image source={
                         require("../../assets/ei_search.png")
@@ -65,6 +59,8 @@ const Home = () => {
                         placeholder="Search"
                         placeholderTextColor="#F5FFFF"
                         >
+                        
+
                     </TextInput>
                 </View>
                 <Image source={
@@ -73,76 +69,22 @@ const Home = () => {
                 </Image>
             </View>
             <LinksHeader></LinksHeader>
-            <View style = {styles.conteinerButtons}>
-                <View style = {styles.buttons}>
-                    <Image source={
-                        require("../../assets/link-like.png")
-                    }>
-                    </Image>
-                    <Text>  Like</Text>
-                </View>
-                
-                <View style = {styles.buttons}>
-                    <Image source={
-                        require("../../assets/link-coment.png")
-                    }>
-                    </Image>
-                    <Text>  Comment</Text>
-                </View>
 
-                <View style = {styles.buttons}>
-                <Image source={
-                    require("../../assets/link-share.png")
-                }>
-                </Image>
-                <Text>  Share</Text>
-                </View>
-            </View> 
+            <TouchableOpacity onPress={irParaTelaLogin}>
+                <Text>Ir para login</Text>
+            </TouchableOpacity>
+
+
+            <ScrollView>
+                <Post/>
+                <Post/>
+            </ScrollView>
+            {/*  */}
         </View>
     );
 
 }
 
-const styles = StyleSheet.create({
-    container: {
-        flex: 1,
-        backgroundColor: '#FFF',
-    },
-    buttons:{
-        flexDirection:"row",
-        paddingLeft:20,
-        paddingRight:20,
-        paddingTop:10,
-        paddingBottom:10,
-    },
-    conteinerButtons:{
-        justifyContent:"center",
-        flexDirection:"row",
-    },
-    header:{
-        minHeight:70,
-        backgroundColor:"#4369B0",
-        paddingVertical:30,
-        flexDirection:"row",
-        justifyContent:"space-between",
-        alignItems:"center",
-        paddingHorizontal:30,
-        paddingTop:50,
-    },
-    inputTextView:{
-        flex:1,
-        borderRadius:28,
-        backgroundColor:"#2C4877",
-        marginHorizontal: 10,
-        height:40,
-        alignItems:"center",
-        flexDirection:"row",
-    },
-    textInput:{
-        flex:1,
-        paddingRight:10,
-        color:"#F5FFFF",
-    },
-});
+
 
 export default Home;
